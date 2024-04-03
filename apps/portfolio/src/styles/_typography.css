@@ -1,0 +1,55 @@
+a {
+  display: inline-block;
+  text-decoration: none;
+  text-decoration-skip-ink: auto;
+  color: inherit;
+  position: relative;
+  transition: var(--transition);
+}
+
+a:hover,
+a:focus {
+  color: var(--green);
+}
+
+p > a {
+  position: relative;
+  display: inline-block;
+  color: var(--green);
+  transition: var(--transition);
+}
+
+p > a::after {
+  content: "";
+  display: block;
+  position: relative;
+  width: 0px;
+  height: 1px;
+  bottom: 0.33rem;
+  background-color: var(--green);
+  opacity: 0.5;
+  transition: var(--transition);
+}
+
+p > a:hover,
+p > a:focus-visible {
+  color: var(--green);
+  outline: 0px;
+}
+
+p > a:hover::after,
+p > a:focus-visible::after {
+  width: 100%;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 0px 0px 10px;
+  font-weight: 600;
+  color: var(--lightest-slate);
+  line-height: 1.1;
+}

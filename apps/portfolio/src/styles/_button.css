@@ -12,6 +12,10 @@
   transition: var(--transition);
 }
 
+.button--large {
+  padding: 1.25rem 1.75rem;
+}
+
 .button:hover,
 .button:focus-visible {
   outline: none;
