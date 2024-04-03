@@ -1,12 +1,51 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="nl" dir="ltr">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Portfolio</title>
-  <link rel="stylesheet" href="./styles/main.css">
-</head>
-<body>
-  <h1>Portfolio</h1>
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Portfolio</title>
+    <link rel="stylesheet" href="./styles/main.css" />
+  </head>
+  <body>
+    <header class="navbar">
+      <nav class="navbar__container">
+        <div class="logo">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="48"
+            height="48"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <rect width="18" height="18" x="3" y="3" rx="2" />
+            <path d="m10 10-2 2 2 2" />
+            <path d="m14 14 2-2-2-2" />
+          </svg>
+        </div>
+
+        <div class="navbar__links">
+          <ul class="navbar__list">
+            <li class="navbar__list-item">
+              <a href="#about">About</a>
+            </li>
+            <li class="navbar__list-item">
+              <a href="#experience">Experience</a>
+            </li>
+            <li class="navbar__list-item">
+              <a href="#work">Work</a>
+            </li>
+            <li class="navbar__list-item">
+              <a href="#contact">Contact</a>
+            </li>
+          </ul>
+
+          <button class="button">Resume</button>
+        </div>
+      </nav>
+    </header>
+  </body>
 </html>
