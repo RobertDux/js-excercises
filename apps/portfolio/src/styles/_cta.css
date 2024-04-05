@@ -1,0 +1,33 @@
+.email-cta {
+  position: fixed;
+  bottom: 0;
+  left: auto;
+  right: 2.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 2.5rem;
+  color: var(--light-slate);
+  z-index: 10;
+}
+
+.email-cta a {
+  margin: 1.25rem auto;
+  padding: 0.5rem;
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  line-height: var(--text-lg);
+  letter-spacing: 0.1rem;
+  writing-mode: vertical-rl;
+}
+
+.email-cta a:hover {
+  transform: translateY(-0.25rem);
+}
+
+.email-cta__line {
+  width: 1px;
+  height: 5.5rem;
+  margin: 0px auto;
+  background-color: var(--light-slate);
+}
