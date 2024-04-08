@@ -12,6 +12,10 @@ a:focus {
   color: var(--green);
 }
 
+p {
+  margin: 0 0 1rem;
+}
+
 p > a {
   position: relative;
   display: inline-block;
@@ -52,4 +56,36 @@ h6 {
   font-weight: 600;
   color: var(--lightest-slate);
   line-height: 1.1;
+}
+
+.numbered-heading {
+  position: relative;
+  margin: 0.5rem 0 2.5rem;
+  width: 100%;
+  display: flex;
+  align-items: flex-end;
+  font-size: clamp(1.5rem, 5vw, var(--text-heading));
+  white-space: nowrap;
+  line-height: 0;
+}
+
+.numbered-heading::before {
+  content: "0" counter(section) ".";
+  position: relative;
+  bottom: 0.25rem;
+  counter-increment: section 1;
+  margin-right: 0.5rem;
+  color: var(--green);
+  font-family: var(--font-mono);
+  font-size: clamp(var(--text-md), 3vw, var(--text-xl));
+  font-weight: 400;
+}
+
+.numbered-heading::after {
+  content: "";
+  display: block;
+  width: 20rem;
+  height: 1px;
+  margin-left: 1.5rem;
+  background-color: var(--lightest-navy);
 }
