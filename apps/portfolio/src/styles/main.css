@@ -6,8 +6,9 @@
 /* components */
 @import "_button.css";
 @import "_navbar.css";
+@import "_footer.css";
+@import "_cta.css";
 
 /* sections */
 @import "_intro.css";
 @import "_about.css";
-@import "_cta.css";

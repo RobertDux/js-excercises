@@ -1,0 +1,20 @@
+.footer {
+  margin: 2rem 1rem;
+  text-align: center;
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+}
+
+.footer a::after {
+  content: none;
+}
+
+.footer__emoji {
+  display: inline-block;
+  transition: var(--transition);
+  transform-origin: center center;
+}
+
+.footer__emoji:hover {
+  transform: rotate(-360deg) scale(1.5);
+}
