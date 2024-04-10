@@ -60,21 +60,20 @@ h6 {
 
 .numbered-heading {
   position: relative;
-  margin: 0.5rem 0 2.5rem;
   width: 100%;
+  margin: 0.5rem 0 3.5rem;
   display: flex;
-  align-items: flex-end;
+  align-items: center;
   font-size: clamp(1.5rem, 5vw, var(--text-heading));
   white-space: nowrap;
-  line-height: 0;
 }
 
 .numbered-heading::before {
-  content: "0" counter(section) ".";
   position: relative;
-  bottom: 0.25rem;
+  bottom: 4px;
   counter-increment: section 1;
-  margin-right: 0.5rem;
+  content: "0" counter(section) ".";
+  margin-right: 10px;
   color: var(--green);
   font-family: var(--font-mono);
   font-size: clamp(var(--text-md), 3vw, var(--text-xl));
@@ -83,9 +82,29 @@ h6 {
 
 .numbered-heading::after {
   content: "";
+  position: relative;
   display: block;
+  margin-left: 1.5rem;
+  top: -0.25rem;
   width: 20rem;
   height: 1px;
-  margin-left: 1.5rem;
   background-color: var(--lightest-navy);
+}
+
+.numbered-heading.overline {
+  display: block;
+  margin-bottom: 1rem;
+  color: var(--green);
+  font-family: var(--font-mono);
+  font-size: var(--text-md);
+  font-weight: 400;
+}
+
+.numbered-heading.overline::before {
+  bottom: 0;
+  font-size: var(--text-sm);
+}
+
+.numbered-heading.overline::after {
+  content: none;
 }
