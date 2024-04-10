@@ -3,12 +3,18 @@
   bottom: 0;
   left: auto;
   right: 2.5rem;
-  display: flex;
+  display: none;
   flex-direction: column;
   align-items: center;
   width: 2.5rem;
   color: var(--light-slate);
   z-index: 10;
+}
+
+@media screen and (min-width: 768px) {
+  .email-cta {
+    display: flex;
+  }
 }
 
 .email-cta a {

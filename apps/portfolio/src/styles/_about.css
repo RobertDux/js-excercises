@@ -1,7 +1,14 @@
 .about {
   display: grid;
-  grid-template-columns: 3fr 2fr;
-  gap: 50px;
+  grid-template-columns: 1fr;
+  justify-items: center;
+  gap: 4rem;
+}
+
+@media screen and (min-width: 768px) {
+  .about {
+    grid-template-columns: 3fr 2fr;
+  }
 }
 
 .skills {
@@ -63,10 +70,17 @@
 }
 
 .about-image::after {
-  top: 1rem;
-  left: 1rem;
+  top: 0.5rem;
+  left: 0.5rem;
   z-index: -1;
   border: 2px solid var(--green);
+}
+
+@media screen and (min-width: 768px) {
+  .about-image::after {
+    top: 1rem;
+    left: 1rem;
+  }
 }
 
 .about-image img {
