@@ -47,6 +47,10 @@
 
 .password {
   justify-content: center;
+  text-align: center;
+  font-family: var(--font-mono);
+  font-size: 1rem;
+  word-break: break-all;
 }
 
 .field__split {
