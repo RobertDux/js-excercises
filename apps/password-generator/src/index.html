@@ -5,11 +5,95 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Generate a safe and secure password</title>
     <link rel="shortcut icon" href="./favicon.ico" type="image/x-icon" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap"
+      rel="stylesheet"
+    />
     <link rel="stylesheet" href="./styles/main.css" />
   </head>
   <body>
     <main class="wrapper">
-      <h1>Generator</h1>
+      <div class="generator">
+        <h1 class="title">Password Generator</h1>
+
+        <section class="section">
+          <h2 class="section__title">Output</h2>
+          <div class="field password js-password">fsafjadfj</div>
+        </section>
+
+        <section class="section">
+          <h2 class="section__title">Length</h2>
+          <div class="field">
+            <div class="field__split">
+              <input
+                type="range"
+                class="field__label js-range"
+                value="16"
+                step="1"
+                min="8"
+                max="64"
+              />
+              <span class="js-length">16</span>
+            </div>
+          </div>
+        </section>
+
+        <section class="section">
+          <h2 class="section__title">Settings</h2>
+          <div class="fields js-options">
+            <div class="field">
+              <div class="field__split">
+                <span class="field__label">Include uppercase</span>
+                <div class="switch">
+                  <input
+                    type="checkbox"
+                    name="options"
+                    checked
+                    id="uppercase"
+                  />
+                  <label for="uppercase">Toggle</label>
+                </div>
+              </div>
+            </div>
+            <div class="field">
+              <div class="field__split">
+                <span class="field__label">Include lowercase</span>
+                <div class="switch">
+                  <input
+                    type="checkbox"
+                    name="options"
+                    checked
+                    id="lowercase"
+                  />
+                  <label for="lowercase">Toggle</label>
+                </div>
+              </div>
+            </div>
+            <div class="field">
+              <div class="field__split">
+                <span class="field__label">Include numbers</span>
+                <div class="switch">
+                  <input type="checkbox" name="options" checked id="numbers" />
+                  <label for="numbers">Toggle</label>
+                </div>
+              </div>
+            </div>
+            <div class="field">
+              <div class="field__split">
+                <span class="field__label">Include symbols</span>
+                <div class="switch">
+                  <input type="checkbox" name="options" checked id="symbols" />
+                  <label for="symbols">Toggle</label>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <button class="btn js-generate">Generate</button>
+      </div>
     </main>
   </body>
 </html>

@@ -1,2 +1,9 @@
 :root {
+  --dark-blue: #070f4e;
+  --blue: #2772db;
+  --grey-blue: #232b66;
+  --teal: #3ab1c8;
+  --off-white: #f5ebeb;
+
+  --font-serif: "Bebas Neue", sans-serif;
 }

@@ -1,0 +1,18 @@
+.btn {
+  width: 100%;
+  padding: 1rem;
+  color: var(--dark-blue);
+  line-height: 1;
+  font-size: 1.5rem;
+  text-align: center;
+  letter-spacing: 1px;
+  border-radius: 0.5rem;
+  background-color: var(--teal);
+  border: none;
+  outline: none;
+  cursor: pointer;
+}
+
+.btn:hover {
+  opacity: 0.9;
+}
