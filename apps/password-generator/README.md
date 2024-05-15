@@ -12,5 +12,5 @@
   - [x] Cijfers
   - [x] Speciale tekens
 - [x] Het gegeneerde wachtwoord wordt op de pagina getoond
-- [] De entropie van het wachtwoord wordt erbij vermeld
-- [] Op basis van deze entropie wordt de wachtwoordsterkte vermeld
+- [x] De entropie van het wachtwoord wordt erbij vermeld
+- [x] Op basis van deze entropie wordt de wachtwoordsterkte vermeld

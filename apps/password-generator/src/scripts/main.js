@@ -11,6 +11,8 @@
   const lengthElem = document.querySelector(".js-length");
   const optionElems = document.querySelectorAll(".js-options input");
   const buttonElem = document.querySelector(".js-generate");
+  const entropyElem = document.querySelector(".js-entropy");
+  const strengthElem = document.querySelector(".js-strength");
 
   let length = 16;
   let options = {
@@ -40,6 +42,18 @@
     return string;
   }
 
+  function determineStrength(entropy) {
+    if (entropy < 100) {
+      return "bad";
+    }
+
+    if (entropy < 200) {
+      return "good";
+    }
+
+    return "excellent";
+  }
+
   function generatePassword() {
     const symbols = getSymbols();
     let password = "";
@@ -52,8 +66,14 @@
       password += pick(symbols);
     }
 
+    const entropy = Math.log2(Math.pow(symbols.length, length));
+    const strength = determineStrength(entropy);
+
     // show in DOM
     outputElem.textContent = password;
+    entropyElem.textContent = Math.floor(entropy);
+    strengthElem.textContent = strength;
+    strengthElem.dataset.strength = strength;
   }
 
   buttonElem.addEventListener(
