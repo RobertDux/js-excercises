@@ -14,7 +14,7 @@
   const entropyElem = document.querySelector(".js-entropy");
   const strengthElem = document.querySelector(".js-strength");
 
-  let length = 16;
+  let length = 32;
   let options = {
     uppercase: true,
     lowercase: true,
@@ -47,7 +47,7 @@
       return "bad";
     }
 
-    if (entropy < 200) {
+    if (entropy < 300) {
       return "good";
     }
 
