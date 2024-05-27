@@ -1,9 +1,10 @@
 import { clearErrorMessage, showErrorMessage } from "./errors";
 import { updateDOM } from "./dom";
+import { getFromStorage, updateStorage } from "./storage";
 
 (function () {
   const MAX_LOCATIONS = 3;
-  const locations = [];
+  const locations = getFromStorage() ?? [];
 
   const formElem = document.querySelector(".js-form");
   const resetElem = document.querySelector(".js-reset");
@@ -17,6 +18,7 @@ import { updateDOM } from "./dom";
       location: data.location,
       name: data.name.length > 0 ? data.name : data.location,
     });
+    updateStorage(locations);
   }
 
   /**
@@ -79,6 +81,8 @@ import { updateDOM } from "./dom";
     formElem.reset();
     clearErrorMessage();
   }
+
+  updateDOM(locations);
 
   formElem.addEventListener("submit", handleFormSubmit, false);
   resetElem.addEventListener("click", handleFormReset, false);
