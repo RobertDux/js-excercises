@@ -1,0 +1,61 @@
+<!doctype html>
+<html dir="ltr" lang="nl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Wethur | The all new, innovative app for your weather needs!</title>
+    <link rel="shortcut icon" href="./favicon.ico" type="image/x-icon" />
+    <link rel="stylesheet" href="./styles/main.css" />
+  </head>
+  <body>
+    <nav class="navbar bg-primary">
+      <div class="container-fluid">
+        <div class="container">
+          <a class="navbar-brand text-bg-primary" href="#">Wethur</a>
+        </div>
+      </div>
+    </nav>
+
+    <main class="container py-4 px-3 mx-auto">
+      <h1>Welcome to Wethur!</h1>
+      <p class="lead mb-4">
+        The all new, innovative app for your weather needs!
+      </p>
+      <h2 class="my-4">Try it out!</h2>
+
+      <form class="js-form">
+        <div class="row align-items-end row-gap-3">
+          <div class="col-sm-4">
+            <label for="location" class="form-label">
+              Location<span class="text-danger">*</span>
+            </label>
+            <input
+              type="text"
+              name="location"
+              id="location"
+              class="form-control"
+              placeholder="e.g. Rotterdam"
+              required
+              minlength="4"
+            />
+          </div>
+
+          <div class="col-sm-4">
+            <label for="name" class="form-label">Name</label>
+            <input
+              type="text"
+              name="name"
+              id="name"
+              class="form-control"
+              placeholder="e.g. Home"
+            />
+          </div>
+
+          <div class="col-sm-4">
+            <button class="btn btn-primary w-100" type="submit">Wethur!</button>
+          </div>
+        </div>
+      </form>
+    </main>
+  </body>
+</html>
