@@ -1,6 +1,6 @@
 const locationsElem = document.querySelector(".js-locations");
 
-function renderLocation(data) {
+function renderLocation(data, removeFn) {
   const name = data.name.length > 0 ? data.name : data.location;
 
   const container = document.createElement("div");
@@ -24,13 +24,19 @@ function renderLocation(data) {
   cardTitle.textContent = data.location;
   cardBody.appendChild(cardTitle);
 
+  const cardButton = document.createElement("button");
+  cardButton.classList.add("btn", "btn-sm", "btn-danger");
+  cardButton.textContent = "Remove";
+  cardButton.addEventListener("click", () => removeFn(data.key), false);
+  cardBody.appendChild(cardButton);
+
   locationsElem.appendChild(container);
 }
 
-export function updateDOM(locations) {
+export function updateDOM(locations, removeFn) {
   locationsElem.replaceChildren();
 
   for (const location of locations) {
-    renderLocation(location);
+    renderLocation(location, removeFn);
   }
 }

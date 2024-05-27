@@ -15,10 +15,21 @@ import { getFromStorage, updateStorage } from "./storage";
    */
   function addLocation(data) {
     locations.unshift({
+      key: crypto.randomUUID(),
       location: data.location,
       name: data.name.length > 0 ? data.name : data.location,
     });
     updateStorage(locations);
+  }
+
+  function removeLocation(key) {
+    const index = locations.findIndex((item) => item.key === key);
+
+    if (index >= 0) {
+      locations.splice(index, 1);
+      updateStorage(locations);
+      updateDOM(locations, removeLocation);
+    }
   }
 
   /**
@@ -70,7 +81,7 @@ import { getFromStorage, updateStorage } from "./storage";
     }
 
     addLocation(validated.data);
-    updateDOM(locations);
+    updateDOM(locations, removeLocation);
     handleFormReset();
   }
 
@@ -82,7 +93,7 @@ import { getFromStorage, updateStorage } from "./storage";
     clearErrorMessage();
   }
 
-  updateDOM(locations);
+  updateDOM(locations, removeLocation);
 
   formElem.addEventListener("submit", handleFormSubmit, false);
   resetElem.addEventListener("click", handleFormReset, false);
