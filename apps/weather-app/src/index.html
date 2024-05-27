@@ -36,7 +36,8 @@
               class="form-control"
               placeholder="e.g. Rotterdam"
               required
-              minlength="4"
+              minlength="3"
+              maxlength="32"
             />
           </div>
 
@@ -48,14 +49,32 @@
               id="name"
               class="form-control"
               placeholder="e.g. Home"
+              maxlength="16"
             />
           </div>
 
           <div class="col-sm-4">
-            <button class="btn btn-primary w-100" type="submit">Wethur!</button>
+            <div class="row g-1">
+              <div class="col-8">
+                <button class="btn btn-primary w-100" type="submit">
+                  Wethur!
+                </button>
+              </div>
+              <div class="col">
+                <button class="btn btn-secondary w-100 js-reset" type="button">
+                  Reset
+                </button>
+              </div>
+            </div>
           </div>
         </div>
+
+        <p class="js-error text-danger mt-2 invisible"></p>
       </form>
+
+      <div class="row mt-4 js-locations"></div>
     </main>
+
+    <script type="module" src="./scripts/main.js"></script>
   </body>
 </html>
