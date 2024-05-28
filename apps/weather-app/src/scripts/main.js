@@ -1,6 +1,7 @@
 import { clearErrorMessage, showErrorMessage } from "./errors";
 import { updateDOM } from "./dom";
 import { getFromStorage, updateStorage } from "./storage";
+import { getWeatherForCity } from "./weather";
 
 (function () {
   const MAX_LOCATIONS = 3;
@@ -59,7 +60,7 @@ import { getFromStorage, updateStorage } from "./storage";
    * Handle submit event
    * @param {FormEvent} e
    */
-  function handleFormSubmit(e) {
+  async function handleFormSubmit(e) {
     e.preventDefault();
 
     // Check if number of locations exceeds max
@@ -75,12 +76,19 @@ import { getFromStorage, updateStorage } from "./storage";
       return showErrorMessage(validated.errors[0]);
     }
 
+    const weather = await getWeatherForCity(validated.data.city);
+
+    // Check if response is OK
+    if (!weather.success) {
+      return showErrorMessage(weather.error);
+    }
+
     // Check if location has been entered before
-    if (locations.some((item) => item.city === validated.data.city)) {
+    if (locations.some((item) => item.city === weather.data.name)) {
       return showErrorMessage("Location already displayed.");
     }
 
-    addLocation(validated.data);
+    addLocation({ city: weather.data.name, name: validated.data.name });
     updateDOM(locations, removeLocation);
     handleFormReset();
   }

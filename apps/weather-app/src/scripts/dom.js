@@ -20,7 +20,7 @@ function renderLocation(data, removeFn) {
   card.appendChild(cardBody);
 
   const cardTitle = document.createElement("h3");
-  cardTitle.classList.add("card-title");
+  cardTitle.classList.add("lead");
   cardTitle.textContent = data.city;
   cardBody.appendChild(cardTitle);
 
