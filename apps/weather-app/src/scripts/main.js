@@ -1,15 +1,7 @@
-import {
-  clearErrorMessage,
-  showErrorMessage,
-  showGeoErrorMessage,
-} from "./errors";
+import { clearErrorMessage, showErrorMessage, showGeoErrorMessage } from "./errors";
 import { startLoading, stopLoading, updateDOM } from "./dom";
 import { getFromStorage, updateStorage } from "./storage";
-import {
-  getWeatherForCity,
-  getWeatherForCoords,
-  getWeatherForLocations,
-} from "./weather";
+import { getWeatherForCity, getWeatherForCoords, getWeatherForLocations } from "./weather";
 import {
   GEO_BUTTON_TEXT,
   INVALID_CITY_ERROR,
@@ -193,13 +185,9 @@ import {
     }
 
     startLoading(geoElem);
-    navigator.geolocation.getCurrentPosition(
-      handleCoordsSuccess,
-      hanldeCoordsError,
-      {
-        enableHighAccuracy: true,
-      }
-    );
+    navigator.geolocation.getCurrentPosition(handleCoordsSuccess, hanldeCoordsError, {
+      enableHighAccuracy: true,
+    });
   }
 
   // Load weather data and render locations (if any)

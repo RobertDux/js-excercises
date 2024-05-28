@@ -82,7 +82,7 @@
       e.preventDefault();
       generatePassword();
     },
-    false
+    false,
   );
 
   rangeElem.addEventListener(
@@ -92,7 +92,7 @@
       setLengthInDOM(length);
       generatePassword();
     },
-    false
+    false,
   );
 
   optionElems.forEach(function (elem) {
@@ -102,7 +102,7 @@
         options[e.currentTarget.id] = e.currentTarget.checked;
         generatePassword();
       },
-      false
+      false,
     );
   });
 

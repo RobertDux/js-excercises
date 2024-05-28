@@ -40,30 +40,15 @@ function renderLocation({ location, weather }, removeFn) {
   const cardBody = buildElement("div", ["card-body"]);
   const cardTitle = buildElement("h3", ["lead"], location.city);
   const image = buildElement("img");
-  image.setAttribute(
-    "src",
-    "https://openweathermap.org/img/wn/" + weather.icon + "@2x.png"
-  );
-  const general = buildElement(
-    "p",
-    ["m-0"],
-    "General: " + weather.general + "."
-  );
+  image.setAttribute("src", "https://openweathermap.org/img/wn/" + weather.icon + "@2x.png");
+  const general = buildElement("p", ["m-0"], "General: " + weather.general + ".");
   const temperature = buildElement(
     "p",
     ["m-0"],
-    "Temperature: " + Math.round(weather.temperature) + " degrees."
+    "Temperature: " + Math.round(weather.temperature) + " degrees.",
   );
-  const humidity = buildElement(
-    "p",
-    [],
-    "Humidity: " + weather.humidity + "%."
-  );
-  const cardButton = buildElement(
-    "button",
-    ["btn", "btn-sm", "btn-danger"],
-    "Remove"
-  );
+  const humidity = buildElement("p", [], "Humidity: " + weather.humidity + "%.");
+  const cardButton = buildElement("button", ["btn", "btn-sm", "btn-danger"], "Remove");
   cardButton.addEventListener("click", () => removeFn(location.key), false);
   card.appendChild(cardHeader);
   card.appendChild(cardBody);
