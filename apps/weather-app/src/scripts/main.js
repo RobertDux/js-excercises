@@ -46,7 +46,7 @@ import { getWeatherForCity } from "./weather";
       locations.splice(index, 1);
       forecasts.splice(index, 1);
       // updateStorage(locations);
-      updateDOM(locations, removeLocation);
+      updateDOM(zip(locations, forecasts), removeLocation);
     }
   }
 
