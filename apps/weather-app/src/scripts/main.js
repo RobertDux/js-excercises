@@ -1,9 +1,9 @@
 import { clearErrorMessage, showErrorMessage } from "./errors";
 import { updateDOM } from "./dom";
 import { getFromStorage, updateStorage } from "./storage";
-import { getWeatherForCity } from "./weather";
+import { getWeatherForCity, getWeatherForLocations } from "./weather";
 
-(function () {
+(async function () {
   const MAX_LOCATIONS = 3;
   const locations = getFromStorage() ?? [];
   const forecasts = [];
@@ -33,7 +33,7 @@ import { getWeatherForCity } from "./weather";
       city: city,
       name: name.length > 0 ? name : city,
     });
-    // updateStorage(locations);
+    updateStorage(locations);
 
     // Add weather
     forecasts.push(weather);
@@ -45,7 +45,7 @@ import { getWeatherForCity } from "./weather";
     if (index >= 0) {
       locations.splice(index, 1);
       forecasts.splice(index, 1);
-      // updateStorage(locations);
+      updateStorage(locations);
       updateDOM(zip(locations, forecasts), removeLocation);
     }
   }
@@ -122,6 +122,9 @@ import { getWeatherForCity } from "./weather";
     clearErrorMessage();
   }
 
+  // Load weather data and render locations (if any)
+  const weather = await getWeatherForLocations(locations);
+  forecasts.push(...weather);
   updateDOM(zip(locations, forecasts), removeLocation);
 
   formElem.addEventListener("submit", handleFormSubmit, false);

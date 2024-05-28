@@ -46,3 +46,14 @@ export async function getWeatherForCity(city) {
     },
   };
 }
+
+export async function getWeatherForLocations(locations) {
+  const data = [];
+
+  for (const location of locations) {
+    const weather = await getWeatherForCity(location.city);
+    data.push(weather.data ?? {});
+  }
+
+  return data;
+}
