@@ -1,3 +1,5 @@
+import { NO_LOCATIONS_TEXT } from "./constants";
+
 const locationsElem = document.querySelector(".js-locations");
 
 /**
@@ -84,7 +86,7 @@ export function updateDOM(data, removeFn) {
   locationsElem.replaceChildren();
 
   if (!data.length) {
-    const text = buildElement("p", [], "Enter a city to get started.");
+    const text = buildElement("p", [], NO_LOCATIONS_TEXT);
     return locationsElem.appendChild(text);
   }
 

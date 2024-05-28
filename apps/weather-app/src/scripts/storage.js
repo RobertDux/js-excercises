@@ -1,4 +1,4 @@
-const LOCAL_STORAGE_KEY = "wethur_locations";
+import { LOCAL_STORAGE_KEY } from "./constants";
 
 /**
  * Tries parsing a given JSON string

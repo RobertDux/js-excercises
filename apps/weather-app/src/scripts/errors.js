@@ -1,3 +1,10 @@
+import {
+  GEO_ERROR_DEFAULT,
+  GEO_ERROR_NOT_FOUND,
+  GEO_ERROR_PERMISSION,
+  GEO_ERROR_TIMEOUT,
+} from "./constants";
+
 const errorElem = document.querySelector(".js-error");
 
 /**
@@ -24,16 +31,16 @@ export function clearErrorMessage() {
  */
 export function showGeoErrorMessage(error) {
   if (error.code === 1) {
-    return showErrorMessage("We need your permission to use your location.");
+    return showErrorMessage(GEO_ERROR_PERMISSION);
   }
 
   if (error.code === 2) {
-    return showErrorMessage("We cannot determine your location.");
+    return showErrorMessage(GEO_ERROR_NOT_FOUND);
   }
 
   if (error.code === 3) {
-    return showErrorMessage("Determining your location took too.");
+    return showErrorMessage(GEO_ERROR_TIMEOUT);
   }
 
-  showErrorMessage("Determining your location failed, please try again.");
+  showErrorMessage(GEO_ERROR_DEFAULT);
 }

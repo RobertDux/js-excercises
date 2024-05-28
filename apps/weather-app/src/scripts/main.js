@@ -10,9 +10,15 @@ import {
   getWeatherForCoords,
   getWeatherForLocations,
 } from "./weather";
+import {
+  GEO_BUTTON_TEXT,
+  INVALID_CITY_ERROR,
+  LOCATION_PRESENT_ERROR,
+  MAX_LOCATIONS,
+  MAX_LOCATIONS_EXCEEDED_ERROR,
+} from "./constants";
 
 (async function () {
-  const MAX_LOCATIONS = 3;
   const locations = getFromStorage() ?? [];
   const forecasts = [];
 
@@ -82,7 +88,7 @@ import {
     const city = data.city.trim();
 
     if (city.length <= 2) {
-      errors.push("Please enter a valid city.");
+      errors.push(INVALID_CITY_ERROR);
     }
 
     return {
@@ -101,7 +107,7 @@ import {
 
     // Check if number of locations exceeds max
     if (locations.length >= MAX_LOCATIONS) {
-      return showErrorMessage("Maximum amount of locations reached.");
+      return showErrorMessage(MAX_LOCATIONS_EXCEEDED_ERROR);
     }
 
     const formData = new FormData(formElem);
@@ -121,7 +127,7 @@ import {
 
     // Check if location has been entered before
     if (locations.some((item) => item.city === weather.data.name)) {
-      return showErrorMessage("Location already displayed.");
+      return showErrorMessage(LOCATION_PRESENT_ERROR);
     }
 
     addLocation({
@@ -147,7 +153,7 @@ import {
    */
   async function handleCoordsSuccess(position) {
     const weather = await getWeatherForCoords(position.coords);
-    stopLoading(geoElem, "Use my location!");
+    stopLoading(geoElem, GEO_BUTTON_TEXT);
 
     // Check if response is OK
     if (!weather.success) {
@@ -156,7 +162,7 @@ import {
 
     // Check if location has been entered before
     if (locations.some((item) => item.city === weather.data.name)) {
-      return showErrorMessage("Location already displayed.");
+      return showErrorMessage(LOCATION_PRESENT_ERROR);
     }
 
     addLocation({
@@ -174,7 +180,7 @@ import {
    */
   function hanldeCoordsError(error) {
     showGeoErrorMessage(error);
-    stopLoading(geoElem, "Use my location!");
+    stopLoading(geoElem, GEO_BUTTON_TEXT);
   }
 
   /**
@@ -183,7 +189,7 @@ import {
   function handleGeo() {
     // Check if number of locations exceeds max
     if (locations.length >= MAX_LOCATIONS) {
-      return showErrorMessage("Maximum amount of locations reached.");
+      return showErrorMessage(MAX_LOCATIONS_EXCEEDED_ERROR);
     }
 
     startLoading(geoElem);

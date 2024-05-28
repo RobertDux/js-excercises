@@ -1,3 +1,5 @@
+import { API_ERROR_DEFAULT, API_ERROR_NOT_FOUND } from "./constants";
+
 const API_BASE_URL = "https://api.openweathermap.org/data/2.5/weather";
 const API_KEY = process.env.API_KEY;
 
@@ -81,8 +83,8 @@ async function makeWeatherAPICall(options) {
  */
 function getErrorMessage(code) {
   if (code === "404") {
-    return "Could not find that city.";
+    return API_ERROR_NOT_FOUND;
   }
 
-  return "Something went wrong when retrieving weather data.";
+  return API_ERROR_DEFAULT;
 }
