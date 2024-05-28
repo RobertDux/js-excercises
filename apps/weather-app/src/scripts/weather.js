@@ -22,6 +22,7 @@ function getErrorMessage(cod) {
 export async function getWeatherForCity(city) {
   const params = new URLSearchParams({
     q: city,
+    units: "metric",
     appid: API_KEY,
   });
   const response = await fetch(API_BASE_URL + "?" + params.toString());
