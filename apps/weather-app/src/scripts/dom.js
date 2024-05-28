@@ -50,11 +50,11 @@ function renderLocation({ location, weather }, removeFn) {
   const temperature = buildElement(
     "p",
     ["m-0"],
-    "Temperature: " + weather.temperature + " degrees."
+    "Temperature: " + Math.round(weather.temperature) + " degrees."
   );
   const humidity = buildElement(
     "p",
-    "",
+    [],
     "Humidity: " + weather.humidity + "%."
   );
   const cardButton = buildElement(
@@ -77,6 +77,11 @@ function renderLocation({ location, weather }, removeFn) {
 
 export function updateDOM(data, removeFn) {
   locationsElem.replaceChildren();
+
+  if (!data.length) {
+    const text = buildElement("p", [], "Enter a city to get started.");
+    return locationsElem.appendChild(text);
+  }
 
   for (const element of data) {
     renderLocation(element, removeFn);
