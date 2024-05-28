@@ -3,11 +3,11 @@ const API_KEY = process.env.API_KEY;
 
 /**
  * Creates a human-readable error message to show users
- * @param {String} cod
+ * @param {String} code
  * @returns string
  */
-function getErrorMessage(cod) {
-  if (cod === "404") {
+function getErrorMessage(code) {
+  if (code === "404") {
     return "Could not find that city.";
   }
 
