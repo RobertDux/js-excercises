@@ -16,8 +16,8 @@ import { getFromStorage, updateStorage } from "./storage";
   function addLocation(data) {
     locations.unshift({
       key: crypto.randomUUID(),
-      location: data.location,
-      name: data.name.length > 0 ? data.name : data.location,
+      city: data.city,
+      name: data.name.length > 0 ? data.name : data.city,
     });
     updateStorage(locations);
   }
@@ -42,16 +42,16 @@ import { getFromStorage, updateStorage } from "./storage";
     const data = Object.fromEntries(formData.entries());
 
     const name = data.name.trim();
-    const location = data.location.trim();
+    const city = data.city.trim();
 
-    if (location.length <= 2) {
-      errors.push("Please enter a valid location.");
+    if (city.length <= 2) {
+      errors.push("Please enter a valid city.");
     }
 
     return {
       success: errors.length === 0,
       errors: errors ?? null,
-      data: !errors.length ? { name, location } : null,
+      data: !errors.length ? { name, city } : null,
     };
   }
 
@@ -76,7 +76,7 @@ import { getFromStorage, updateStorage } from "./storage";
     }
 
     // Check if location has been entered before
-    if (locations.some((item) => item.location === validated.data.location)) {
+    if (locations.some((item) => item.city === validated.data.city)) {
       return showErrorMessage("Location already displayed.");
     }
 

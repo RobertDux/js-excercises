@@ -1,7 +1,7 @@
 const locationsElem = document.querySelector(".js-locations");
 
 function renderLocation(data, removeFn) {
-  const name = data.name.length > 0 ? data.name : data.location;
+  const name = data.name.length > 0 ? data.name : data.city;
 
   const container = document.createElement("div");
   container.classList.add("col-sm-4");
@@ -21,7 +21,7 @@ function renderLocation(data, removeFn) {
 
   const cardTitle = document.createElement("h3");
   cardTitle.classList.add("card-title");
-  cardTitle.textContent = data.location;
+  cardTitle.textContent = data.city;
   cardBody.appendChild(cardTitle);
 
   const cardButton = document.createElement("button");
