@@ -1,5 +1,10 @@
 const LOCAL_STORAGE_KEY = "wethur_locations";
 
+/**
+ * Tries parsing a given JSON string
+ * @param {String} string
+ * @returns Object or null
+ */
 function tryParse(string) {
   try {
     return JSON.parse(string);
@@ -8,11 +13,19 @@ function tryParse(string) {
   }
 }
 
+/**
+ * Gets stored data from LocalStorage
+ * @returns Object
+ */
 export function getFromStorage() {
   const dataString = localStorage.getItem(LOCAL_STORAGE_KEY);
   return tryParse(dataString);
 }
 
+/**
+ * Updates data in LocalStorage
+ * @param {Object} data
+ */
 export function updateStorage(data) {
   localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(data));
 }

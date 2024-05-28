@@ -75,6 +75,11 @@ function renderLocation({ location, weather }, removeFn) {
   locationsElem.appendChild(container);
 }
 
+/**
+ * Main render functions. (Re-)builds DOM on updates.
+ * @param {Collection} data
+ * @param {Function} removeFn
+ */
 export function updateDOM(data, removeFn) {
   locationsElem.replaceChildren();
 

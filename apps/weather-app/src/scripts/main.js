@@ -11,6 +11,12 @@ import { getWeatherForCity, getWeatherForLocations } from "./weather";
   const formElem = document.querySelector(".js-form");
   const resetElem = document.querySelector(".js-reset");
 
+  /**
+   * Zips given arrays into single array
+   * @param {Array} a
+   * @param {Array} b
+   * @returns Array
+   */
   function zip(a, b) {
     return a.map(function (elem, i) {
       return {
@@ -39,6 +45,10 @@ import { getWeatherForCity, getWeatherForLocations } from "./weather";
     forecasts.push(weather);
   }
 
+  /**
+   * Removes location and forecast for given key
+   * @param {String} key
+   */
   function removeLocation(key) {
     const index = locations.findIndex((item) => item.key === key);
 

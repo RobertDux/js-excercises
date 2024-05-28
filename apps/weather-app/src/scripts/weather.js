@@ -47,6 +47,11 @@ export async function getWeatherForCity(city) {
   };
 }
 
+/**
+ * Fetches forecasts for all given locations
+ * @param {Array} locations
+ * @returns Array
+ */
 export async function getWeatherForLocations(locations) {
   const data = [];
 
