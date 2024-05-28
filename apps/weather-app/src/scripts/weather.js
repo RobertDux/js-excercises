@@ -48,6 +48,40 @@ export async function getWeatherForCity(city) {
 }
 
 /**
+ * Fetches the current weather for given coordinates
+ * @param {Object} coords
+ * @returns weather date or error message
+ */
+export async function getWeatherForCoords(coords) {
+  const params = new URLSearchParams({
+    lat: coords.latitude,
+    lon: coords.longitude,
+    units: "metric",
+    appid: API_KEY,
+  });
+  const response = await fetch(API_BASE_URL + "?" + params.toString());
+  const result = await response.json();
+
+  if (!response.ok) {
+    return {
+      success: false,
+      error: getErrorMessage(result.cod),
+    };
+  }
+
+  return {
+    success: true,
+    data: {
+      name: result.name,
+      general: result.weather[0].main,
+      icon: result.weather[0].icon,
+      temperature: result.main.temp,
+      humidity: result.main.humidity,
+    },
+  };
+}
+
+/**
  * Fetches forecasts for all given locations
  * @param {Array} locations
  * @returns Array

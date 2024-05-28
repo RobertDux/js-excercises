@@ -1,7 +1,15 @@
-import { clearErrorMessage, showErrorMessage } from "./errors";
-import { updateDOM } from "./dom";
+import {
+  clearErrorMessage,
+  showErrorMessage,
+  showGeoErrorMessage,
+} from "./errors";
+import { startLoading, stopLoading, updateDOM } from "./dom";
 import { getFromStorage, updateStorage } from "./storage";
-import { getWeatherForCity, getWeatherForLocations } from "./weather";
+import {
+  getWeatherForCity,
+  getWeatherForCoords,
+  getWeatherForLocations,
+} from "./weather";
 
 (async function () {
   const MAX_LOCATIONS = 3;
@@ -10,6 +18,7 @@ import { getWeatherForCity, getWeatherForLocations } from "./weather";
 
   const formElem = document.querySelector(".js-form");
   const resetElem = document.querySelector(".js-reset");
+  const geoElem = document.querySelector(".js-geo");
 
   /**
    * Zips given arrays into single array
@@ -132,6 +141,61 @@ import { getWeatherForCity, getWeatherForLocations } from "./weather";
     clearErrorMessage();
   }
 
+  /**
+   * Uses the coordinates of the user to fetch and display weather
+   * @param {GeolocationPosition} position
+   */
+  async function handleCoordsSuccess(position) {
+    const weather = await getWeatherForCoords(position.coords);
+    stopLoading(geoElem, "Use my location!");
+
+    // Check if response is OK
+    if (!weather.success) {
+      return showErrorMessage(weather.error);
+    }
+
+    // Check if location has been entered before
+    if (locations.some((item) => item.city === weather.data.name)) {
+      return showErrorMessage("Location already displayed.");
+    }
+
+    addLocation({
+      city: weather.data.name,
+      name: "Current location",
+      weather: weather.data,
+    });
+    updateDOM(zip(locations, forecasts), removeLocation);
+    handleFormReset();
+  }
+
+  /**
+   * Shows error message and stops loading
+   * @param {GeolocationPositionError} error
+   */
+  function hanldeCoordsError(error) {
+    showGeoErrorMessage(error);
+    stopLoading(geoElem, "Use my location!");
+  }
+
+  /**
+   * Asks user for permission and fetches geo coords
+   */
+  function handleGeo() {
+    // Check if number of locations exceeds max
+    if (locations.length >= MAX_LOCATIONS) {
+      return showErrorMessage("Maximum amount of locations reached.");
+    }
+
+    startLoading(geoElem);
+    navigator.geolocation.getCurrentPosition(
+      handleCoordsSuccess,
+      hanldeCoordsError,
+      {
+        enableHighAccuracy: true,
+      }
+    );
+  }
+
   // Load weather data and render locations (if any)
   const weather = await getWeatherForLocations(locations);
   forecasts.push(...weather);
@@ -139,4 +203,5 @@ import { getWeatherForCity, getWeatherForLocations } from "./weather";
 
   formElem.addEventListener("submit", handleFormSubmit, false);
   resetElem.addEventListener("click", handleFormReset, false);
+  geoElem.addEventListener("click", handleGeo, false);
 })();

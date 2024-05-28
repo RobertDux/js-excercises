@@ -92,3 +92,31 @@ export function updateDOM(data, removeFn) {
     renderLocation(element, removeFn);
   }
 }
+
+/**
+ * Shows spinner and loading text
+ * @param {HTMLButtonElement} buttonElem
+ */
+export function startLoading(buttonElem) {
+  buttonElem.replaceChildren();
+  buttonElem.setAttribute("disabled", "");
+
+  // Spinner
+  const spinner = buildElement("span", ["spinner-border", "spinner-border-sm"]);
+  spinner.setAttribute("aria-hidden", "");
+  buttonElem.appendChild(spinner);
+  // Text
+  const text = buildElement("span", ["mx-1"], "Loading...");
+  buttonElem.appendChild(text);
+}
+
+/**
+ * Removes spinner and resets text
+ * @param {HTMLButtonElement} buttonElem
+ * @param {String} text
+ */
+export function stopLoading(buttonElem, text) {
+  buttonElem.replaceChildren();
+  buttonElem.removeAttribute("disabled");
+  buttonElem.textContent = text;
+}
