@@ -28,7 +28,7 @@ import { getWeatherForCity } from "./weather";
     const { name, city, weather } = data;
 
     // Add location
-    locations.unshift({
+    locations.push({
       key: crypto.randomUUID(),
       city: city,
       name: name.length > 0 ? name : city,
@@ -36,7 +36,7 @@ import { getWeatherForCity } from "./weather";
     // updateStorage(locations);
 
     // Add weather
-    forecasts.unshift(weather);
+    forecasts.push(weather);
   }
 
   function removeLocation(key) {
