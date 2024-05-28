@@ -6,21 +6,37 @@ import { getWeatherForCity } from "./weather";
 (function () {
   const MAX_LOCATIONS = 3;
   const locations = getFromStorage() ?? [];
+  const forecasts = [];
 
   const formElem = document.querySelector(".js-form");
   const resetElem = document.querySelector(".js-reset");
+
+  function zip(a, b) {
+    return a.map(function (elem, i) {
+      return {
+        location: elem,
+        weather: b[i],
+      };
+    });
+  }
 
   /**
    * Adds location to in-memory storage
    * @param {Location} data
    */
   function addLocation(data) {
+    const { name, city, weather } = data;
+
+    // Add location
     locations.unshift({
       key: crypto.randomUUID(),
-      city: data.city,
-      name: data.name.length > 0 ? data.name : data.city,
+      city: city,
+      name: name.length > 0 ? name : city,
     });
-    updateStorage(locations);
+    // updateStorage(locations);
+
+    // Add weather
+    forecasts.unshift(weather);
   }
 
   function removeLocation(key) {
@@ -28,7 +44,8 @@ import { getWeatherForCity } from "./weather";
 
     if (index >= 0) {
       locations.splice(index, 1);
-      updateStorage(locations);
+      forecasts.splice(index, 1);
+      // updateStorage(locations);
       updateDOM(locations, removeLocation);
     }
   }
@@ -88,8 +105,12 @@ import { getWeatherForCity } from "./weather";
       return showErrorMessage("Location already displayed.");
     }
 
-    addLocation({ city: weather.data.name, name: validated.data.name });
-    updateDOM(locations, removeLocation);
+    addLocation({
+      city: weather.data.name,
+      name: validated.data.name,
+      weather: weather.data,
+    });
+    updateDOM(zip(locations, forecasts), removeLocation);
     handleFormReset();
   }
 
@@ -101,7 +122,7 @@ import { getWeatherForCity } from "./weather";
     clearErrorMessage();
   }
 
-  updateDOM(locations, removeLocation);
+  updateDOM(zip(locations, forecasts), removeLocation);
 
   formElem.addEventListener("submit", handleFormSubmit, false);
   resetElem.addEventListener("click", handleFormReset, false);

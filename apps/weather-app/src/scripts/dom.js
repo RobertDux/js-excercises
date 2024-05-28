@@ -1,7 +1,7 @@
 const locationsElem = document.querySelector(".js-locations");
 
-function renderLocation(data, removeFn) {
-  const name = data.name.length > 0 ? data.name : data.city;
+function renderLocation({ location, weather }, removeFn) {
+  const name = location.name.length > 0 ? location.name : location.city;
 
   const container = document.createElement("div");
   container.classList.add("col-sm-4");
@@ -21,22 +21,27 @@ function renderLocation(data, removeFn) {
 
   const cardTitle = document.createElement("h3");
   cardTitle.classList.add("lead");
-  cardTitle.textContent = data.city;
+  cardTitle.textContent = location.city;
   cardBody.appendChild(cardTitle);
+
+  const cardText = document.createElement("p");
+  cardText.classList.add("my-4");
+  cardText.textContent = "Temperature: " + weather.temperature + " degrees.";
+  cardBody.appendChild(cardText);
 
   const cardButton = document.createElement("button");
   cardButton.classList.add("btn", "btn-sm", "btn-danger");
   cardButton.textContent = "Remove";
-  cardButton.addEventListener("click", () => removeFn(data.key), false);
+  cardButton.addEventListener("click", () => removeFn(location.key), false);
   cardBody.appendChild(cardButton);
 
   locationsElem.appendChild(container);
 }
 
-export function updateDOM(locations, removeFn) {
+export function updateDOM(data, removeFn) {
   locationsElem.replaceChildren();
 
-  for (const location of locations) {
-    renderLocation(location, removeFn);
+  for (const element of data) {
+    renderLocation(element, removeFn);
   }
 }

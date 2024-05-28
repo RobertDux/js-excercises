@@ -37,6 +37,12 @@ export async function getWeatherForCity(city) {
 
   return {
     success: true,
-    data: result,
+    data: {
+      name: result.name,
+      general: result.weather[0].main,
+      icon: result.weather[0].icon,
+      temperature: result.main.temp,
+      humidity: result.main.humidity,
+    },
   };
 }
