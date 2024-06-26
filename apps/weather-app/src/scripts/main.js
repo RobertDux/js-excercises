@@ -83,6 +83,10 @@ import {
       errors.push(INVALID_CITY_ERROR);
     }
 
+    if (!/^[a-zA-Z,\s]+$/i.test(city)) {
+      errors.push(INVALID_CITY_ERROR);
+    }
+
     return {
       success: errors.length === 0,
       errors: errors ?? null,
