@@ -1,5 +1,5 @@
 <!doctype html>
-<html dir="ltr" lang="nl">
+<html dir="ltr" lang="nl" class="h-100">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -7,10 +7,59 @@
     <link rel="shortcut icon" href="./favicon.ico" type="image/x-icon" />
     <link rel="stylesheet" href="./styles/main.css" />
   </head>
-  <body>
-    <main class="container">
+  <body class="d-flex flex-column h-100">
+    <nav class="navbar bg-primary">
+      <div class="container-fluid">
+        <div class="container">
+          <a class="navbar-brand text-bg-primary" href="#">ToeDoes</a>
+        </div>
+      </div>
+    </nav>
+
+    <main class="container py-4 px-3 mx-auto flex-fill">
       <h1>ToeDoes</h1>
+      <p class="lead mb-4">The all new, innovative app for your todo's! 🚀</p>
+
+      <div>
+        <h2 class="my-2">Mijn toedoes</h2>
+        <p class="js-no-toedoes">Je hebt nog geen toedoes.</p>
+        <div class="js-toedoes"></div>
+      </div>
     </main>
+
+    <footer class="container py-4 mx-auto">
+      <form class="js-toedoe-form">
+        <div class="row g-2">
+          <div class="col">
+            <input
+              type="text"
+              id="toedoe"
+              name="toedoe"
+              class="form-control"
+              placeholder="Write a toedoe with labels (#) and a date (@)"
+            />
+          </div>
+          <div class="col-auto">
+            <button type="submit" class="btn btn-primary">&plus;</button>
+          </div>
+          <div class="col-auto">
+            <button type="button" class="btn btn-secondary">&#8230;</button>
+          </div>
+        </div>
+
+        <div class="row d-none js-description">
+          <div class="col mt-2">
+            <input
+              type="text"
+              name="description"
+              id="description"
+              class="form-control"
+              placeholder="Description"
+            />
+          </div>
+        </div>
+      </form>
+    </footer>
 
     <script type="module" src="./scripts/main.js"></script>
   </body>

@@ -1,1 +1,5 @@
 @import "npm:bootstrap/dist/css/bootstrap.css";
+
+.navbar {
+  height: 4rem;
+}
