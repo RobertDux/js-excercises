@@ -1,3 +1,5 @@
+import { parseTodoText } from "./parser";
+
 (function () {
   const formElem = document.querySelector(".js-toedoe-form");
   const descToggleElem = document.querySelector(".js-toggle-desc");
@@ -12,7 +14,32 @@
 
     const formData = new FormData(formElem);
     const data = Object.fromEntries(formData.entries());
-    console.log(data);
+
+    if (!data.toedoe.trim()) {
+      return;
+    }
+
+    const result = buildTodo(data);
+
+    if (!result.success) {
+      // TODO: show error message
+    }
+
+    // TODO: add to DOM and storage
+
+    formElem.reset();
+    // TODO: clear error message
+  }
+
+  function buildTodo(data) {
+    const errors = [];
+    const todo = parseTodoText(data.toedoe);
+
+    return {
+      success: !errors.length,
+      errors: errors ?? null,
+      data: !errors.length ? todo : null,
+    };
   }
 
   /**
