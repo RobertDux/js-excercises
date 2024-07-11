@@ -1,3 +1,10 @@
+import {
+  ERROR_EXCEED_LABELS,
+  ERROR_INVALID_DEADLINE,
+  ERROR_INVALID_DESCRIPTION,
+  ERROR_INVALID_TODO,
+} from "./contants";
+import { clearErrorMessage, showErrorMessage } from "./errors";
 import { parseTodoText } from "./parser";
 
 (function () {
@@ -22,18 +29,35 @@ import { parseTodoText } from "./parser";
     const result = buildTodo(data);
 
     if (!result.success) {
-      // TODO: show error message
+      return showErrorMessage(result.errors[0]);
     }
 
     // TODO: add to DOM and storage
 
     formElem.reset();
-    // TODO: clear error message
+    clearErrorMessage();
   }
 
   function buildTodo(data) {
     const errors = [];
     const todo = parseTodoText(data.toedoe);
+    todo.description = data.description ?? null;
+
+    if (todo.text.length < 5) {
+      errors.push(ERROR_INVALID_TODO);
+    }
+
+    if (todo.deadline && todo.deadline < todo.added) {
+      errors.push(ERROR_INVALID_DEADLINE);
+    }
+
+    if (todo.labels.length > 3) {
+      errors.push(ERROR_EXCEED_LABELS);
+    }
+
+    if (todo.description && todo.description.length < 5) {
+      errors.push(ERROR_INVALID_DESCRIPTION);
+    }
 
     return {
       success: !errors.length,
