@@ -6,8 +6,11 @@ import {
 } from "./contants";
 import { clearErrorMessage, showErrorMessage } from "./errors";
 import { parseTodoText } from "./parser";
+import { getFromStorage, updateStorage } from "./storage";
 
 (function () {
+  const todos = getFromStorage() ?? [];
+
   const formElem = document.querySelector(".js-toedoe-form");
   const descToggleElem = document.querySelector(".js-toggle-desc");
   const descContainerElem = document.querySelector(".js-desc-container");
@@ -32,12 +35,28 @@ import { parseTodoText } from "./parser";
       return showErrorMessage(result.errors[0]);
     }
 
-    // TODO: add to DOM and storage
+    addTodo(result.data);
+    // TODO: add to DOM
 
+    // Reset form
     formElem.reset();
     clearErrorMessage();
   }
 
+  /**
+   * Adds todo to in-memory list and localStorage
+   * @param {todo} todo
+   */
+  function addTodo(todo) {
+    todos.push(todo);
+    updateStorage(todos);
+  }
+
+  /**
+   * Builds and validates todo from input string and description
+   * @param {Object} data
+   * @returns Object
+   */
   function buildTodo(data) {
     const errors = [];
     const todo = parseTodoText(data.toedoe);
