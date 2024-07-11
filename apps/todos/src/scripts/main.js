@@ -3,7 +3,7 @@ import {
   ERROR_INVALID_DEADLINE,
   ERROR_INVALID_DESCRIPTION,
   ERROR_INVALID_TODO,
-} from "./contants";
+} from "./constants";
 import { clearErrorMessage, showErrorMessage } from "./errors";
 import { parseTodoText } from "./parser";
 import { getFromStorage, updateStorage } from "./storage";

@@ -1,4 +1,4 @@
-import { LOCAL_STORAGE_KEY } from "./contants";
+import { LOCAL_STORAGE_KEY } from "./constants";
 
 /**
  * Tries parsing a given JSON string
