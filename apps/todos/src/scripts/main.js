@@ -4,6 +4,7 @@ import {
   ERROR_INVALID_DESCRIPTION,
   ERROR_INVALID_TODO,
 } from "./constants";
+import { isBeforeDate } from "./date";
 import { updateDOM } from "./dom";
 import { clearErrorMessage, showErrorMessage } from "./errors";
 import { parseTodoText } from "./parser";
@@ -37,7 +38,7 @@ import { getFromStorage, updateStorage } from "./storage";
     }
 
     addTodo(result.data);
-    // TODO: add to DOM
+    updateDOM(todos);
 
     // Reset form
     formElem.reset();
@@ -67,7 +68,7 @@ import { getFromStorage, updateStorage } from "./storage";
       errors.push(ERROR_INVALID_TODO);
     }
 
-    if (todo.deadline && todo.deadline < todo.added) {
+    if (todo.deadline && isBeforeDate(todo.deadline, todo.added)) {
       errors.push(ERROR_INVALID_DEADLINE);
     }
 
