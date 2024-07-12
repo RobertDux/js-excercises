@@ -4,6 +4,7 @@ import {
   ERROR_INVALID_DESCRIPTION,
   ERROR_INVALID_TODO,
 } from "./constants";
+import { updateDOM } from "./dom";
 import { clearErrorMessage, showErrorMessage } from "./errors";
 import { parseTodoText } from "./parser";
 import { getFromStorage, updateStorage } from "./storage";
@@ -119,6 +120,8 @@ import { getFromStorage, updateStorage } from "./storage";
         return false;
     }
   }
+
+  updateDOM(todos);
 
   // Register event listeners
   formElem.addEventListener("submit", handleFormSubmit, false);
