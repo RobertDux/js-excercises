@@ -1,4 +1,5 @@
 import { NO_TODOS_TEXT } from "./constants";
+import { formatDate } from "./date";
 
 const containerElem = document.querySelector(".js-toedoes");
 const textElem = document.querySelector(".js-toedoes-text");
@@ -26,11 +27,47 @@ function buildElement(tag, classes = [], text = null) {
 
 /**
  *
- * @param {*} todo
+ * @param {HTMLElement} parent
+ * @param {String[]} labels
+ */
+function renderLabels(parent, labels) {
+  for (const label of labels) {
+    const badge = buildElement("span", ["badge", "text-bg-primary"], label);
+    parent.appendChild(badge);
+  }
+}
+
+/**
+ *
+ * @param {Object} todo
  */
 function renderTodo(todo) {
-  const container = buildElement("div", ["list-group-item", "list-group-item-action"], todo.text);
-  containerElem.appendChild(container);
+  const listItem = buildElement("div", ["list-group-item", "list-group-item-action"]);
+  const listItemHeader = buildElement("div", ["d-flex", "w-100", "justify-content-between"]);
+  const listItemTitle = buildElement("h3", ["h5", "mb-1"], todo.text);
+  const listItemDate = buildElement("small", ["fw-light"], formatDate(todo.added));
+
+  listItemHeader.appendChild(listItemTitle);
+  listItemHeader.appendChild(listItemDate);
+  listItem.appendChild(listItemHeader);
+
+  if (todo.description) {
+    const listItemDescription = buildElement("p", ["mb-0"], todo.description);
+    listItem.appendChild(listItemDescription);
+  }
+
+  if (todo.labels.length) {
+    const listItemLabels = buildElement("div", ["mt-2", "d-flex", "gap-2"]);
+    renderLabels(listItemLabels, todo.labels);
+    listItem.appendChild(listItemLabels);
+  }
+
+  if (todo.deadline) {
+    const listItemDeadline = buildElement("small", ["fs-6"], " | " + formatDate(todo.deadline));
+    listItemTitle.appendChild(listItemDeadline);
+  }
+
+  containerElem.appendChild(listItem);
 }
 
 /**
