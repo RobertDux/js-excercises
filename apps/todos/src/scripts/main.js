@@ -12,10 +12,30 @@ import { getFromStorage, updateStorage } from "./storage";
 
 (function () {
   const todos = getFromStorage() ?? [];
+  const config = {
+    orderKey: "added",
+    order: "DESC",
+  };
 
   const formElem = document.querySelector(".js-toedoe-form");
   const descToggleElem = document.querySelector(".js-toggle-desc");
   const descContainerElem = document.querySelector(".js-desc-container");
+
+  /**
+   *
+   * @param {Object[]} items
+   * @param {Object} config
+   * @returns {Object[]}  filtered and sorted items
+   */
+  function filterAndSort(items, config) {
+    return items.sort(function (a, b) {
+      if (config.order === "DESC") {
+        return b[config.orderKey] - a[config.orderKey];
+      }
+
+      return a[config.orderKey] - b[config.orderKey];
+    });
+  }
 
   /**
    * Handle submit event
@@ -51,7 +71,7 @@ import { getFromStorage, updateStorage } from "./storage";
    */
   function addTodo(todo) {
     todos.push(todo);
-    updateStorage(todos);
+    updateStorage(filterAndSort(todos, config));
   }
 
   /**
@@ -122,7 +142,7 @@ import { getFromStorage, updateStorage } from "./storage";
     }
   }
 
-  updateDOM(todos);
+  updateDOM(filterAndSort(todos, config));
 
   // Register event listeners
   formElem.addEventListener("submit", handleFormSubmit, false);
